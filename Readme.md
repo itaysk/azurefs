@@ -3,6 +3,7 @@ Reuse your Linux productivity skills and tools to script against Azure like regu
 
 ## Structure
 
+```
 - Subscription (root)
       - Resource Groups
             - Resources (json)
@@ -11,6 +12,7 @@ Reuse your Linux productivity skills and tools to script against Azure like regu
                   - Resources (json)
                   - Resource Groups
                         - Resources (json)
+```
 
 All nodes are directories, except leaf nodes which are files
 First level directories that start with "!" are artificial directories injected to provide additional functionality (Resource Group name can't start with "@" so you can be sure those won't conflict)
