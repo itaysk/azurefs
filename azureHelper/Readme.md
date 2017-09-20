@@ -1,0 +1,2 @@
+This azureHelper package is a collection of small add-ons and fixes to the official Azure Go SDK (https://github.com/Azure/azure-sdk-for-go).
+Hopefully one day those will be added upstream and this package will be obsolete.
