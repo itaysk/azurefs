@@ -19,7 +19,7 @@ First level directories that start with "!" are artificial directories injected 
 
 
 ## Known issues
-- Network calls on GetAttr cause `ls` in Resource Group level to get and cache every resource in that resource group ([more info[(https://stackoverflow.com/questions/46267972/fuse-avoid-calculating-size-in-getattr)]).
+- Network calls on GetAttr cause `ls` in Resource Group level to get and cache every resource in that resource group ([more info](https://stackoverflow.com/questions/46267972/fuse-avoid-calculating-size-in-getattr)).
 - Only basic FUSE callbacks are implemented.
 - You have to open a tag folder in order to populate it's content. You can't `cd @tags/someTag/someRg` before you `cd` into 'someTag' because 'someRg' won't exist yet in this path.
 - Only tag names are considered, not tag values.
