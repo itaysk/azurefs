@@ -26,7 +26,7 @@ func (this *ResourceNode) GetAttr(out *fuse.Attr, file nodefs.File, context *fus
 		return fuse.OK //TODO: should return OK?
 	}
 	out.Size = this.size
-	out.Mode = fuse.S_IFREG
+	out.Mode = fuse.S_IFREG | 0444
 	return fuse.OK
 }
 

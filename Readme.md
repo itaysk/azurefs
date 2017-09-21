@@ -43,11 +43,14 @@ Once the FUSE server is running it will block, so consider running this in backg
   -v    Print verbose (debug) level messages
 ```
 
-## Built on
+### Tested on
 
 - Ubuntu 16.04.3 LTS
-- Go 1.6.2
-- https://github.com/hanwen/go-fuse (master)
+  - FUSE is built in
+- macOS 10.12.6
+  - install [osxfuse](https://osxfuse.github.io/) 
+  - run `Library/Filesystems/osxfuse.fs/Contents/Resources/load_osxfus` before using
+  - remember to escape '@' in virtual directories like `@tags`
 
 ## Contribution
 
