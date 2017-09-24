@@ -6,5 +6,6 @@ import (
 
 type ResourceGroupNode struct {
 	nodefs.Node
+	fs   *AzureFs
 	Name string
 }

@@ -11,6 +11,7 @@ import (
 
 type ResourceNode struct {
 	nodefs.Node
+	fs       *AzureFs
 	Name     string
 	Id       string
 	size     uint64
@@ -44,7 +45,7 @@ func (this *ResourceNode) Open(flags uint32, context *fuse.Context) (file nodefs
 // it's safe to call before each access to file's properties
 func (this *ResourceNode) cacheFile() error {
 	if this.contents == nil {
-		t, err := azureClient.GetResourceJson(this.Id)
+		t, err := this.fs.azureClient.GetResourceJson(this.Id)
 		if err != nil { //error should be handled by caller
 			return err
 		}

@@ -9,13 +9,14 @@ import (
 
 type TagNode struct {
 	nodefs.Node
+	fs   *AzureFs
 	Name string
 }
 
 func (this *TagNode) OpenDir(context *fuse.Context) ([]fuse.DirEntry, fuse.Status) {
 	log.Debugf("in OpenDir for tag %s", this.Name)
 	res := []fuse.DirEntry{}
-	rgs, rs, err := azureClient.FindAllByTag(this.Name)
+	rgs, rs, err := this.fs.azureClient.FindAllByTag(this.Name)
 	if err != nil {
 		log.Fatalf("Failed finding tags for %s", this.Name)
 		log.Fatal(err)
@@ -32,7 +33,7 @@ func (this *TagNode) OpenDir(context *fuse.Context) ([]fuse.DirEntry, fuse.Statu
 		rgn := ResourceGroupNode{Node: nodefs.NewDefaultNode(), Name: *rg.Name}
 		this.Inode().NewChild(*rg.Name, true, &rgn)
 
-		rs, err := azureClient.GetAllResourcesInGroup(*rg.Name)
+		rs, err := this.fs.azureClient.GetAllResourcesInGroup(*rg.Name)
 		if err != nil {
 			log.Fatalf("Failed getting resources for group %s", *rg.Name)
 			log.Fatal(err)

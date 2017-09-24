@@ -70,8 +70,10 @@ func main() {
 		os.Exit(2)
 	}
 
-	//create and stat the fuse server
-	fs := azfuse.NewAzureFs(azureSettings)
+	//create and start the fuse server
+	azureClient := azfuse.NewAzureClient(azureSettings)
+	root := &azfuse.SubscriptionNode{Node: nodefs.NewDefaultNode()}
+	fs := azfuse.NewAzureFs(azureClient, root)
 	log.Infof("mounting on %s", *mountPoint)
 	server, _, err := nodefs.MountRoot(*mountPoint, fs.Root(), nil)
 	defer server.Unmount()
@@ -81,7 +83,7 @@ func main() {
 	}
 	handleSigint(server, *mountPoint)
 	server.Serve()
-	//todo: waitmount
+	//todo: waitmount?
 
 	//main is expected to never return, since server.Serve() will block.
 }

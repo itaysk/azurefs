@@ -13,6 +13,14 @@ import (
 	"github.com/Azure/go-autorest/autorest/adal"
 )
 
+type IAzureClient interface {
+	GetAllResourceGroups() (*[]resources.Group, error)
+	GetAllResourcesInGroup(rgName string) (*[]resources.GenericResource, error)
+	GetResourceJson(id string) ([]byte, error)
+	GetTags() (*[]resources.TagDetails, error)
+	FindAllByTag(tag string) (*[]resources.Group, *[]resources.GenericResource, error)
+}
+
 type AzureClient struct {
 	autorestClient  autorest.Client
 	groupsClient    resources.GroupsClient
@@ -25,7 +33,7 @@ type AzureClient struct {
 var subscriptionID string
 var pageSize int32 = 50
 
-func NewAzureClient(azureSettings map[string]string) AzureClient {
+func NewAzureClient(azureSettings map[string]string) IAzureClient {
 	log.Debugf("New Azure client with settings: +%v", azureSettings)
 	subscriptionID = azureSettings["subscriptionId"]
 	res := AzureClient{}

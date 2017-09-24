@@ -5,17 +5,18 @@ import (
 )
 
 type AzureFs struct {
-	root *SubscriptionNode
+	azureClient IAzureClient
+	root        *SubscriptionNode
 }
 
-var azureClient AzureClient
+func NewAzureFs(azureClient IAzureClient, root nodefs.Node) *AzureFs {
 
-func NewAzureFs(azureSettings map[string]string) *AzureFs {
-	azureClient = NewAzureClient(azureSettings)
-
-	return &AzureFs{
-		root: &SubscriptionNode{Node: nodefs.NewDefaultNode()},
+	azfs := &AzureFs{
+		root:        root.(*SubscriptionNode),
+		azureClient: azureClient,
 	}
+	azfs.root.fs = azfs
+	return azfs
 }
 
 func (fs *AzureFs) String() string {
