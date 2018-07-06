@@ -15,8 +15,7 @@ Reuse your Linux productivity skills and tools to script against Azure like regu
 ```
 
 All nodes are directories, except leaf nodes which are files
-First level directories that start with "!" are artificial directories injected to provide additional functionality (Resource Group name can't start with "@" so you can be sure those won't conflict)
-
+First level directories that start with "@" are artificial directories injected to provide additional functionality (Resource Group names can't start with "@" so you can be sure those won't conflict)
 
 ## Known issues
 - Network calls on GetAttr cause `ls` in Resource Group level to get and cache every resource in that resource group ([more info](https://stackoverflow.com/questions/46267972/fuse-avoid-calculating-size-in-getattr)).
@@ -52,6 +51,3 @@ Once the FUSE server is running it will block, so consider running this in backg
   - run `Library/Filesystems/osxfuse.fs/Contents/Resources/load_osxfus` before using
   - remember to escape '@' in virtual directories like `@tags`
 
-## Contribution
-
-Please do! Open an issue describing the fix or feature, once validated feel free to submit a PR.
